@@ -3,6 +3,7 @@ using GameConsole.GConsole;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameConsole.UI;
+using Microsoft.Xna.Framework.Input;
 
 
 namespace GameConsole
@@ -33,6 +34,14 @@ namespace GameConsole
 
         private GraphicsDeviceManager _graphics;
 
+        private KeyboardState _currentKeyboard;
+        private KeyboardState _previousKeyboard;
+
+        public Keys ToggleKey = Keys.F2;
+
+
+
+
         public ConsoleWrapper(GraphicsDeviceManager graphics, SpriteFont font, int width, int height, Dock _dock)
         {
             _graphics = graphics;
@@ -55,6 +64,14 @@ namespace GameConsole
         }
         public void Update()
         {
+            _previousKeyboard = _currentKeyboard;
+            _currentKeyboard = Keyboard.GetState();
+
+            if (_currentKeyboard.IsKeyDown(ToggleKey) && _previousKeyboard.IsKeyUp(ToggleKey))
+            {
+                IsActive = !IsActive;
+            }
+
             if(!HasFocus){return;}
             if(!IsActive){return;}
 
