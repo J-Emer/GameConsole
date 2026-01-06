@@ -1,4 +1,3 @@
-using System.Security.Principal;
 using GameConsole.Commands;
 using GameConsole.GConsole;
 using Microsoft.Xna.Framework;
